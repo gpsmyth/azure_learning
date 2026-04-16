@@ -35,5 +35,11 @@ resource "azurerm_storage_account" "sa" {
   tags = {
     environment = "test"
   }
-
 }
+
+resource "azurerm_role_assignment" "rg_storage_blob_data_contributor" {
+  scope                = azurerm_storage_account.sa.id
+  role_definition_name = "Storage Blob Data Contributor"
+  principal_id         = var.principal_id
+}
+// Storage Blob Data Contributor is better for apps to read/write blobs
