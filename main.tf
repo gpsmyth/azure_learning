@@ -23,6 +23,9 @@ resource "azurerm_subnet" "subnet" {
   address_prefixes     = ["10.10.1.0/24"]
 }
 
+# -----------------------------
+# Storage Account (Blob)
+# -----------------------------
 resource "azurerm_storage_account" "sa" {
   name                     = var.storage_account_name
   resource_group_name      = azurerm_resource_group.rg.name
@@ -37,6 +40,9 @@ resource "azurerm_storage_account" "sa" {
   }
 }
 
+# -----------------------------
+# Role Assignment (Blob)
+# -----------------------------
 resource "azurerm_role_assignment" "rg_storage_blob_data_contributor" {
   scope                = azurerm_storage_account.sa.id
   role_definition_name = "Storage Blob Data Contributor"
